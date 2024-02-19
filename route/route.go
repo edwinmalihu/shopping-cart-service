@@ -2,6 +2,7 @@ package route
 
 import (
 	"log"
+	"shopping-cart-service/controller"
 	"shopping-cart-service/middleware"
 	"shopping-cart-service/repository"
 
@@ -20,6 +21,15 @@ func SetupRoutes(db *gorm.DB) {
 	cartRepository := repository.NewCartRepo(db)
 	if err := cartRepository.Migrate(); err != nil {
 		log.Fatal("Cart migrate err", err)
+	}
+
+	cartController := controller.NewCartController(cartRepository)
+
+	apiRoutes := httpRouter.Group("api/")
+	{
+		apiRoutes.POST("/add", cartController.AddCart)
+		apiRoutes.GET("/list", cartController.ListCart)
+		apiRoutes.DELETE("/delet", cartController.DeleteCart)
 	}
 
 	httpRouter.Run(":8082")
