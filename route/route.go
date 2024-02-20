@@ -29,7 +29,8 @@ func SetupRoutes(db *gorm.DB) {
 	{
 		apiRoutes.POST("/add", cartController.AddCart)
 		apiRoutes.GET("/list", cartController.ListCart)
-		apiRoutes.DELETE("/delet", cartController.DeleteCart)
+		apiRoutes.DELETE("/delete", cartController.DeleteCart)
+		apiRoutes.GET("/detail", cartController.DetailCart)
 	}
 
 	httpRouter.Run(":8082")
