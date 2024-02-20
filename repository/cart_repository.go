@@ -36,7 +36,7 @@ func (c cartRepo) DetailProduct(req uint) (data model.Product, err error) {
 
 // DetailCart implements CartRepo.
 func (c cartRepo) DetailCart(req uint) (data response.ResponseCart, err error) {
-	return data, c.DB.Raw(`select p.id as product_id, p."name" as name, p.price as price, c.quantity as quantity from cart as c join product as p on c.product_id = p.id where c.id = ?`, req).Scan(&data).Error
+	return data, c.DB.Raw(`select p.id as product_id, p."name" as name, p.price as price, c.quantity as quantity from cart as c join product as p on c.product_id = p.id where c.id = ? and c.deleted_at isnull`, req).Scan(&data).Error
 }
 
 // AddCart implements CartRepo.
