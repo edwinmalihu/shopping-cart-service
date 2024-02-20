@@ -7,9 +7,10 @@ type StokData struct {
 
 func ValidateStok(stok uint, qty uint) StokData {
 	var res StokData
-	if stok >= qty {
+	// stok = 5, qty = 2
+	if qty > stok {
 		res = StokData{
-			Stok:  0,
+			Stok:  stok,
 			State: false,
 		}
 

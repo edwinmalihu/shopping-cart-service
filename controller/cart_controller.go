@@ -63,13 +63,15 @@ func (c cartController) AddCart(ctx *gin.Context) {
 	}
 
 	product, err := c.cartRepo.DetailProduct(req.ProductID)
+	log.Println("stok : ", product.Stok)
+	log.Println("qty : ", req.Quantity)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, err.Error())
 		return
 	}
 
 	isTrue := utils.ValidateStok(product.Stok, req.Quantity)
-	if isTrue.State {
+	if !isTrue.State {
 		ctx.JSON(http.StatusBadRequest, "Data yang dimasukan salah")
 		return
 	}
