@@ -14,11 +14,11 @@ import (
 
 // DBConnection
 func DBConnection() (*gorm.DB, error) {
-	USER := os.Getenv("USER")
-	PASS := os.Getenv("PASS")
-	HOST := os.Getenv("HOST")
+	USER := os.Getenv("POSTGRES_USER")
+	PASS := os.Getenv("POSTGRES_PASSWORD")
+	HOST := os.Getenv("POSTGRES_HOST")
 	PORT := os.Getenv("PORT")
-	DBNAME := os.Getenv("DBNAME")
+	DBNAME := os.Getenv("POSTGRES_DB")
 	SSLMODE := os.Getenv("SSLMODE")
 	TIMEZONE := os.Getenv("TIMEZONE")
 	// USER := "postgres"
