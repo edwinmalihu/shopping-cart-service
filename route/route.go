@@ -1,7 +1,9 @@
 package route
 
 import (
+	"fmt"
 	"log"
+	"os"
 	"shopping-cart-service/controller"
 	"shopping-cart-service/middleware"
 	"shopping-cart-service/repository"
@@ -33,5 +35,6 @@ func SetupRoutes(db *gorm.DB) {
 		apiRoutes.GET("/detail", cartController.DetailCart)
 	}
 
-	httpRouter.Run(":8082")
+	// httpRouter.Run(":8082")
+	httpRouter.Run(fmt.Sprintf(":%s", os.Getenv("SERVER_PORT")))
 }
